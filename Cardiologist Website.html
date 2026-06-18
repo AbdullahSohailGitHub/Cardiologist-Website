@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr. Ahmad Karimi — Consultant Cardiologist</title>
+  <meta name="description" content="Dr. Ahmad Karimi is a Consultant Cardiologist with 20+ years in interventional cardiology. Book your consultation today."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─────────────────────────────────────────
+       RESET & TOKENS
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #080C18;
+      --bg2:       #0D1220;
+      --card:      #111827;
+      --card2:     #0F1623;
+      --border:    #1E2D45;
+      --border2:   rgba(255,255,255,0.06);
+      --red:       #C8102E;
+      --red2:      #E8192E;
+      --red-glow:  rgba(200,16,46,0.25);
+      --gold:      #C9A84C;
+      --ivory:     #E8E4DC;
+      --muted:     #6B7A8F;
+      --white:     #FFFFFF;
+      --nav-h:     76px;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--ivory);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+       SCROLL PROGRESS BAR
+    ───────────────────────────────────────── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+      background: var(--red);
+      width: 0%; transition: width 0.1s linear;
+      box-shadow: 0 0 8px var(--red);
+    }
+
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+    nav#main-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h); z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
+      transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s;
+    }
+    nav#main-nav.scrolled {
+      background: rgba(8,12,24,0.92);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-brand { text-decoration: none; }
+    .nav-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--white); display: block; line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+    .nav-brand-sub {
+      font-size: 0.65rem; color: var(--red);
+      text-transform: uppercase; letter-spacing: 0.14em;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 1px; background: var(--red);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--red); color: #fff;
+      padding: 10px 22px; border-radius: 3px;
+      font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: background 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .nav-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.12);
+      transform: translateX(-100%) skewX(-15deg);
+      transition: transform 0.4s;
+    }
+    .nav-cta:hover { background: var(--red2); box-shadow: 0 0 20px var(--red-glow); }
+    .nav-cta:hover::after { transform: translateX(110%) skewX(-15deg); }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 55% 45%;
+      padding-top: var(--nav-h);
+      position: relative; overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+      opacity: 0.55;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 6% 80px;
+      position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--red); letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .hero-eyebrow-line {
+      width: 28px; height: 1.5px; background: var(--red);
+    }
+    h1.hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4.2vw, 4rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.02em; color: var(--white);
+      margin-bottom: 18px;
+    }
+    h1.hero-title .dr-name {
+      display: block; font-size: 0.55em;
+      font-weight: 400; font-style: italic;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    h1.hero-title .hero-tagline {
+      color: var(--red); font-style: italic;
+    }
+    .hero-creds {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 22px;
+    }
+    .cred-chip {
+      background: rgba(200,16,46,0.1);
+      border: 1px solid rgba(200,16,46,0.25);
+      color: rgba(232,228,220,0.8);
+      font-size: 0.7rem; font-weight: 500;
+      padding: 4px 11px; border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+    .hero-bio {
+      font-size: 0.975rem; color: var(--muted);
+      line-height: 1.8; max-width: 470px;
+      margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Magnetic buttons */
+    .btn-mag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; border-radius: 3px;
+      padding: 13px 26px; cursor: pointer; border: none;
+      transition: box-shadow 0.25s, transform 0.15s;
+      position: relative; overflow: hidden;
+    }
+    .btn-mag-primary {
+      background: var(--red); color: #fff;
+    }
+    .btn-mag-primary:hover { box-shadow: 0 8px 32px var(--red-glow); }
+    .btn-mag-ghost {
+      background: transparent; color: var(--ivory);
+      border: 1px solid var(--border);
+    }
+    .btn-mag-ghost:hover { border-color: var(--red); color: var(--red); }
+
+    /* Hero right — photo panel */
+    .hero-right {
+      position: relative; overflow: hidden; z-index: 1;
+      display: flex; align-items: flex-end;
+    }
+    .hero-photo-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #111827 0%, #0B0E1A 100%);
+    }
+    .hero-photo-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 30% 70%, rgba(200,16,46,0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%);
+    }
+    .hero-photo-initials {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-54%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      font-weight: 400; color: rgba(255,255,255,0.04);
+      user-select: none; line-height: 1; white-space: nowrap;
+    }
+    .hero-photo-label {
+      position: absolute; top: 40px; right: 28px;
+      font-size: 0.65rem; color: rgba(255,255,255,0.15);
+      text-transform: uppercase; letter-spacing: 0.2em;
+      writing-mode: vertical-rl; text-orientation: mixed;
+    }
+    /* Red side accent line */
+    .hero-right-line {
+      position: absolute; left: 0; top: 15%; bottom: 15%;
+      width: 1px; background: linear-gradient(to bottom, transparent, var(--red) 30%, var(--red) 70%, transparent);
+      opacity: 0.4;
+    }
+    /* Stats bar */
+    .hero-stats-bar {
+      position: relative; z-index: 2; width: 100%;
+      background: rgba(200,16,46,0.88);
+      backdrop-filter: blur(10px);
+      display: flex; padding: 22px 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hstat {
+      flex: 1; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      padding: 0 12px;
+    }
+    .hstat:last-child { border-right: none; }
+    .hstat-num {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: #fff; line-height: 1; margin-bottom: 4px;
+    }
+    .hstat-label {
+      font-size: 0.62rem; color: rgba(255,255,255,0.65);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    /* ─────────────────────────────────────────
+       TRUST STRIP
+    ───────────────────────────────────────── */
+    .trust-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 6%;
+      display: flex; align-items: center; gap: 40px;
+      overflow: hidden;
+    }
+    .trust-label {
+      font-size: 0.65rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.14em;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .trust-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
+    .trust-items {
+      display: flex; gap: 36px; align-items: center;
+      overflow: hidden; flex: 1;
+    }
+    .trust-item {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.88rem; font-weight: 600;
+      color: rgba(232,228,220,0.4);
+      white-space: nowrap; letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .trust-item:hover { color: var(--ivory); }
+
+    /* ─────────────────────────────────────────
+       SHARED SECTION STYLES
+    ───────────────────────────────────────── */
+    .section { padding: 108px 6%; }
+    .section-alt { background: var(--bg2); }
+    .eyebrow {
+      font-size: 0.68rem; font-weight: 600;
+      color: var(--red); letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    h2.sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 600; color: var(--white);
+      letter-spacing: -0.015em; line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    h2.sec-title em { font-style: italic; color: var(--muted); font-weight: 400; }
+    .sec-sub {
+      font-size: 0.925rem; color: var(--muted);
+      max-width: 480px; line-height: 1.8; margin-bottom: 56px;
+    }
+    .red-rule { width: 36px; height: 2px; background: var(--red); margin-bottom: 44px; }
+
+    /* Reveal animation base */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-28px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    /* ─────────────────────────────────────────
+       ABOUT
+    ───────────────────────────────────────── */
+    #about .about-wrap {
+      display: grid; grid-template-columns: 1fr 1.15fr;
+      gap: 80px; align-items: start;
+    }
+    .about-body { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 18px; }
+    .cred-timeline { margin-top: 32px; }
+    .cred-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding-bottom: 20px; margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .cred-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .cred-item:hover { border-color: rgba(200,16,46,0.3); }
+    .cred-year {
+      font-size: 0.7rem; font-weight: 600; color: var(--red);
+      letter-spacing: 0.08em; min-width: 44px; padding-top: 2px;
+    }
+    .cred-text strong { display: block; font-size: 0.875rem; color: var(--white); margin-bottom: 2px; }
+    .cred-text span { font-size: 0.8rem; color: var(--muted); }
+
+    /* Expertise cards */
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 24px 20px;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .exp-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 2px; height: 0; background: var(--red);
+      transition: height 0.35s ease;
+    }
+    .exp-card:hover { border-color: rgba(200,16,46,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .exp-card:hover::before { height: 100%; }
+    .exp-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .exp-card h3 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 7px; }
+    .exp-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+    /* ─────────────────────────────────────────
+       SERVICES
+    ───────────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 6px;
+      overflow: hidden;
+    }
+    .svc-card {
+      background: var(--card);
+      padding: 36px 28px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    /* Shimmer sweep effect */
+    .svc-card::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.55s ease;
+    }
+    .svc-card:hover { background: #141d2e; }
+    .svc-card:hover::after { left: 160%; }
+    .svc-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 400;
+      color: rgba(255,255,255,0.04); line-height: 1;
+      margin-bottom: 14px; user-select: none;
+    }
+    .svc-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+    .svc-card p { font-size: 0.835rem; color: var(--muted); line-height: 1.72; }
+    .svc-arrow {
+      display: inline-block; margin-top: 14px;
+      font-size: 0.75rem; color: var(--red);
+      opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .svc-card:hover .svc-arrow { opacity: 1; transform: translateX(0); }
+
+    /* ─────────────────────────────────────────
+       PROCESS
+    ───────────────────────────────────────── */
+    .process-wrap {
+      position: relative;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    /* Connecting line */
+    .process-wrap::before {
+      content: ''; position: absolute;
+      top: 27px; left: 26px; right: 26px; height: 1px;
+      background: var(--border); z-index: 0;
+    }
+    .proc-step {
+      padding: 64px 24px 0;
+      position: relative; z-index: 1;
+      transition: transform 0.3s;
+    }
+    .proc-step:hover { transform: translateY(-3px); }
+    .proc-dot {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 600; color: var(--white);
+      margin-bottom: 22px; position: relative;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+    .proc-step:hover .proc-dot {
+      border-color: var(--red);
+      background: rgba(200,16,46,0.1);
+      box-shadow: 0 0 18px var(--red-glow);
+    }
+    .proc-step h3 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .proc-step p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─────────────────────────────────────────
+       APPOINTMENTS
+    ───────────────────────────────────────── */
+    .appt-wrap {
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px; align-items: start;
+    }
+    .appt-form { display: flex; flex-direction: column; gap: 14px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fgroup { display: flex; flex-direction: column; gap: 6px; }
+    .flabel {
+      font-size: 0.7rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .appt-form input,
+    .appt-form select,
+    .appt-form textarea {
+      width: 100%; background: var(--card2);
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif; font-size: 0.875rem;
+      color: var(--ivory); outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .appt-form input::placeholder, .appt-form textarea::placeholder { color: var(--muted); }
+    .appt-form input:focus, .appt-form select:focus, .appt-form textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(200,16,46,0.12);
+    }
+    .appt-form select option { background: var(--card); }
+    .appt-form textarea { resize: vertical; min-height: 110px; }
+    .appt-form button {
+      background: var(--red); color: #fff; border: none; border-radius: 3px;
+      padding: 14px 28px; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
+      letter-spacing: 0.03em; transition: background 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .appt-form button:hover { background: var(--red2); box-shadow: 0 4px 20px var(--red-glow); }
+    .appt-form button::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.12);
+      transform: translateX(-100%) skewX(-15deg);
+      transition: transform 0.45s;
+    }
+    .appt-form button:hover::after { transform: translateX(110%) skewX(-15deg); }
+    .form-note { font-size: 0.75rem; color: var(--muted); }
+
+    /* Clinic info */
+    .clinic-info { display: flex; flex-direction: column; gap: 0; }
+    .clinic-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 600; color: var(--white);
+      margin-bottom: 28px;
+    }
+    .ci-item {
+      display: flex; gap: 14px;
+      padding: 18px 0; border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .ci-item:last-of-type { border-bottom: none; }
+    .ci-item:hover { border-color: rgba(200,16,46,0.3); }
+    .ci-icon {
+      width: 38px; height: 38px; border-radius: 4px;
+      background: rgba(200,16,46,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; color: var(--red);
+    }
+    .ci-item strong { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .ci-item a, .ci-item span { font-size: 0.875rem; color: var(--ivory); text-decoration: none; }
+    .ci-item a:hover { color: var(--red); }
+    .wa-btn {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(37,211,102,0.08);
+      border: 1px solid rgba(37,211,102,0.2);
+      border-radius: 3px; padding: 13px 18px; margin-top: 20px;
+      color: #4ade80; text-decoration: none;
+      font-size: 0.875rem; font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .wa-btn:hover { background: rgba(37,211,102,0.14); border-color: rgba(37,211,102,0.4); }
+
+    /* ─────────────────────────────────────────
+       TESTIMONIALS
+    ───────────────────────────────────────── */
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .testi-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 28px 24px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .testi-card:hover {
+      border-color: rgba(200,16,46,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+    .t-stars { color: var(--gold); letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 16px; }
+    .t-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.02rem; font-style: italic;
+      color: var(--ivory); line-height: 1.65;
+      flex: 1; margin-bottom: 20px;
+    }
+    .t-author { display: flex; align-items: center; gap: 12px; }
+    .t-av {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(200,16,46,0.15);
+      border: 1px solid rgba(200,16,46,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem; color: var(--red); font-weight: 600;
+    }
+    .t-author strong { display: block; font-size: 0.84rem; color: var(--white); }
+    .t-author span { font-size: 0.75rem; color: var(--muted); }
+
+    /* ─────────────────────────────────────────
+       CONTACT
+    ───────────────────────────────────────── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .contact-block {
+      padding: 22px 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-block:last-child { border-bottom: none; }
+    .contact-block h3 {
+      font-size: 0.68rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px;
+    }
+    .contact-block a, .contact-block p { font-size: 0.9rem; color: var(--ivory); text-decoration: none; }
+    .contact-block a:hover { color: var(--red); }
+    .map-placeholder {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; min-height: 340px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .map-icon { font-size: 2rem; opacity: 0.2; }
+    .map-placeholder p { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      background: #050810;
+      border-top: 1px solid var(--border);
+      padding: 32px 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: rgba(255,255,255,0.5);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.78rem; color: rgba(255,255,255,0.3);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    footer small { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+
+    /* ─────────────────────────────────────────
+       FLOATING WHATSAPP
+    ───────────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 900;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    /* Pulse ring */
+    .wa-float::before {
+      content: ''; position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.5);
+      animation: waPulse 2s ease-out infinite;
+    }
+    .wa-float::after {
+      content: ''; position: absolute; inset: -12px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(37,211,102,0.25);
+      animation: waPulse 2s ease-out infinite 0.4s;
+    }
+    @keyframes waPulse {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 260px; }
+      .about-wrap, .appt-wrap, .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .process-wrap { grid-template-columns: 1fr 1fr; }
+      .process-wrap::before { display: none; }
+      .proc-step { padding-top: 20px; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      nav#main-nav { padding: 0 5%; }
+      .section { padding: 72px 5%; }
+    }
+    @media (max-width: 580px) {
+      h1.hero-title { font-size: 2.3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-wrap { grid-template-columns: 1fr; }
+      .frow { grid-template-columns: 1fr; }
+      .hero-stats-bar { flex-wrap: wrap; }
+      .hstat { flex: 0 0 50%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal, .reveal-left { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-brand">
+    <span class="nav-brand-name">Dr. Ahmad Karimi</span>
+    <span class="nav-brand-sub">Consultant Cardiologist</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#appointments">Appointments</a></li>
+    <li><a href="#testimonials">Patients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#appointments" class="nav-cta">Book Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      Consultant Cardiologist · MRCP · FACC
+    </div>
+    <h1 class="hero-title">
+      <span class="dr-name">Dr. Ahmad Karimi</span>
+      Exceptional cardiac care,<br>
+      <span class="hero-tagline" id="hero-tagline"></span>
+    </h1>
+    <div class="hero-creds">
+      <span class="cred-chip">MRCP (UK)</span>
+      <span class="cred-chip">FACC</span>
+      <span class="cred-chip">Interventional Cardiology</span>
+      <span class="cred-chip">20+ Years</span>
+      <span class="cred-chip">Cleveland Clinic Fellowship</span>
+    </div>
+    <p class="hero-bio">
+      Specialist in interventional cardiology, advanced cardiac diagnostics, and preventive heart care. Trusted by patients and referring physicians for the most complex cardiac conditions.
+    </p>
+    <div class="hero-actions">
+      <a href="#appointments" class="btn-mag btn-mag-primary" data-magnetic>Book a Consultation</a>
+      <a href="https://wa.me/923001234567" class="btn-mag btn-mag-ghost" data-magnetic target="_blank">💬 WhatsApp Us</a>
+    </div>
+  </div>
+
+  <div class="hero-right" id="hero-right">
+    <div class="hero-photo-bg"></div>
+    <div class="hero-photo-pattern"></div>
+    <div class="hero-right-line"></div>
+    <div class="hero-photo-initials" aria-hidden="true">AK</div>
+    <div class="hero-photo-label" aria-hidden="true">Doctor photo</div>
+    <div class="hero-stats-bar">
+      <div class="hstat"><span class="hstat-num" data-count="20" data-suffix="+">0</span><div class="hstat-label">Years Practice</div></div>
+      <div class="hstat"><span class="hstat-num" data-count="5000" data-suffix="+">0</span><div class="hstat-label">Patients Treated</div></div>
+      <div class="hstat"><span class="hstat-num" data-count="98" data-suffix="%">0</span><div class="hstat-label">Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <span class="trust-label">Recognised by</span>
+  <div class="trust-divider"></div>
+  <div class="trust-items">
+    <span class="trust-item">Royal College of Physicians</span>
+    <span class="trust-item">·</span>
+    <span class="trust-item">American College of Cardiology</span>
+    <span class="trust-item">·</span>
+    <span class="trust-item">Pakistan Cardiac Society</span>
+    <span class="trust-item">·</span>
+    <span class="trust-item">Cleveland Clinic Alumni</span>
+    <span class="trust-item">·</span>
+    <span class="trust-item">Aga Khan University</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-wrap">
+    <div class="reveal-left">
+      <p class="eyebrow">About the Doctor</p>
+      <h2 class="sec-title">A cardiologist who listens <em>before he prescribes</em></h2>
+      <div class="red-rule"></div>
+      <p class="about-body">Dr. Karimi completed his cardiology training at the Royal College of Physicians, London, and undertook subspecialty fellowship in interventional cardiology at the Cleveland Clinic. He returned to Pakistan to build a practice founded on evidence-based medicine and genuine patient partnership.</p>
+      <p class="about-body">His clinical focus spans acute coronary syndromes, structural heart disease, and preventive cardiology. Known for explaining complex diagnoses in plain language — and for being reachable when it matters most.</p>
+      <div class="cred-timeline">
+        <div class="cred-item"><span class="cred-year">1998</span><div class="cred-text"><strong>MBBS</strong><span>Aga Khan University, Karachi</span></div></div>
+        <div class="cred-item"><span class="cred-year">2003</span><div class="cred-text"><strong>MRCP</strong><span>Royal College of Physicians, London</span></div></div>
+        <div class="cred-item"><span class="cred-year">2006</span><div class="cred-text"><strong>Interventional Cardiology Fellowship</strong><span>Cleveland Clinic, USA</span></div></div>
+        <div class="cred-item"><span class="cred-year">2008</span><div class="cred-text"><strong>FACC</strong><span>Fellow, American College of Cardiology</span></div></div>
+        <div class="cred-item"><span class="cred-year">2009</span><div class="cred-text"><strong>Private Practice Established</strong><span>Lahore, Pakistan</span></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="exp-grid">
+        <div class="exp-card"><div class="exp-icon">🫀</div><h3>Interventional Cardiology</h3><p>Coronary angiography, balloon angioplasty, and stenting. Minimally invasive with same-day discharge in most cases.</p></div>
+        <div class="exp-card"><div class="exp-icon">📊</div><h3>Advanced Diagnostics</h3><p>Echocardiography, stress testing, Holter monitoring, and CT coronary angiography — results discussed same appointment.</p></div>
+        <div class="exp-card"><div class="exp-icon">🛡️</div><h3>Preventive Cardiology</h3><p>Comprehensive cardiovascular risk assessment, lipid management, hypertension treatment, and personal prevention plans.</p></div>
+        <div class="exp-card"><div class="exp-icon">💊</div><h3>Heart Failure</h3><p>Outpatient and inpatient management of acute and chronic heart failure, with structured follow-up programmes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section-alt" id="services">
+  <p class="eyebrow reveal">Services</p>
+  <h2 class="sec-title reveal">Comprehensive cardiac care, <em>under one roof</em></h2>
+  <p class="sec-sub reveal">Every service is delivered personally by Dr. Karimi — no delegation to junior staff for patient-facing consultations.</p>
+  <div class="services-grid">
+    <div class="svc-card reveal"><div class="svc-num">01</div><h3>Initial Consultation</h3><p>60-minute appointment covering full cardiac history, physical examination, and a personalised investigation plan. Referral letters from GPs and specialists accepted.</p><span class="svc-arrow">→ Learn more</span></div>
+    <div class="svc-card reveal"><div class="svc-num">02</div><h3>ECG & Echocardiography</h3><p>Resting and exercise ECGs, transthoracic and transoesophageal echocardiography. Reports issued within 24 hours with direct-to-patient explanation.</p><span class="svc-arrow">→ Learn more</span></div>
+    <div class="svc-card reveal"><div class="svc-num">03</div><h3>Coronary Angiography</h3><p>Day-case catheterisation with results discussed same day. PCI (stenting) performed where clinically indicated during the same admission.</p><span class="svc-arrow">→ Learn more</span></div>
+    <div class="svc-card reveal"><div class="svc-num">04</div><h3>Hypertension Clinic</h3><p>Specialist review for treatment-resistant hypertension, medication optimisation, ambulatory blood pressure monitoring, and organ damage assessment.</p><span class="svc-arrow">→ Learn more</span></div>
+    <div class="svc-card reveal"><div class="svc-num">05</div><h3>Arrhythmia Assessment</h3><p>Holter monitoring (24h–7 day), event recorders, and electrophysiology referral coordination for complex rhythm disorders including AF management.</p><span class="svc-arrow">→ Learn more</span></div>
+    <div class="svc-card reveal"><div class="svc-num">06</div><h3>Second Opinions</h3><p>Independent review of previous cardiac investigations and treatment plans. International records and imaging reviewed. Report provided in writing.</p><span class="svc-arrow">→ Learn more</span></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <p class="eyebrow reveal">How It Works</p>
+  <h2 class="sec-title reveal">From first call to <em>clear answers</em></h2>
+  <p class="sec-sub reveal">A straightforward path — no unnecessary waits, no repeat tests you've already had.</p>
+  <div class="process-wrap">
+    <div class="proc-step reveal"><div class="proc-dot">1</div><h3>Book Online or by Phone</h3><p>Choose your appointment type, preferred date, and whether you're a new or returning patient. Confirmation within one business day.</p></div>
+    <div class="proc-step reveal"><div class="proc-dot">2</div><h3>Arrive & Consult</h3><p>Bring any previous reports and imaging. Dr. Karimi reviews them before you're called in. No rushed ten-minute slots.</p></div>
+    <div class="proc-step reveal"><div class="proc-dot">3</div><h3>Diagnostics if Needed</h3><p>On-site ECG, echo, or blood tests ordered and, where possible, performed the same day. No unnecessary return visits.</p></div>
+    <div class="proc-step reveal"><div class="proc-dot">4</div><h3>Treatment Plan & Follow-up</h3><p>A written summary and clear next steps. Follow-up appointments, medication, or referrals arranged before you leave.</p></div>
+  </div>
+</section>
+
+<!-- APPOINTMENTS -->
+<section class="section section-alt" id="appointments">
+  <div class="appt-wrap">
+    <div class="reveal">
+      <p class="eyebrow">Book an Appointment</p>
+      <h2 class="sec-title">Request a consultation</h2>
+      <div class="red-rule"></div>
+      <form class="appt-form" onsubmit="handleAppt(event)" id="appt-form">
+        <div class="frow">
+          <div class="fgroup"><label class="flabel">First Name</label><input type="text" placeholder="First name" required/></div>
+          <div class="fgroup"><label class="flabel">Last Name</label><input type="text" placeholder="Last name" required/></div>
+        </div>
+        <div class="frow">
+          <div class="fgroup"><label class="flabel">Email</label><input type="email" placeholder="your@email.com" required/></div>
+          <div class="fgroup"><label class="flabel">Phone / WhatsApp</label><input type="tel" placeholder="+92 300 0000000"/></div>
+        </div>
+        <div class="fgroup">
+          <label class="flabel">Appointment Type</label>
+          <select>
+            <option value="" disabled selected>Select appointment type</option>
+            <option>Initial Consultation (New Patient)</option>
+            <option>Follow-up Consultation</option>
+            <option>Echocardiography</option>
+            <option>Stress Test / Exercise ECG</option>
+            <option>Second Opinion</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label class="flabel">Brief Description</label>
+          <textarea placeholder="Describe your symptoms or reason for consultation. If you have a referral letter, mention it here and email it to appointments@drakhmadkarimi.com"></textarea>
+        </div>
+        <button type="submit" id="appt-btn">Request Appointment →</button>
+        <p class="form-note">🔒 Your information is sent securely. We'll confirm within one business day.</p>
+      </form>
+    </div>
+    <div class="clinic-info reveal">
+      <h3>Clinic Information</h3>
+      <div class="ci-item"><div class="ci-icon">🏥</div><div><strong>Address</strong><span>Suite 412, Shaukat Khanum Medical Complex<br>Canal Road, Lahore, Pakistan</span></div></div>
+      <div class="ci-item"><div class="ci-icon">🕐</div><div><strong>Hours</strong><span>Mon–Fri: 10:00 AM – 5:00 PM<br>Sat: 10:00 AM – 1:00 PM (prior appointment)</span></div></div>
+      <div class="ci-item"><div class="ci-icon">📧</div><div><strong>Appointments Email</strong><a href="mailto:appointments@drakhmadkarimi.com">appointments@drakhmadkarimi.com</a></div></div>
+      <div class="ci-item"><div class="ci-icon">📧</div><div><strong>General Enquiries</strong><a href="mailto:info@drakhmadkarimi.com">info@drakhmadkarimi.com</a></div></div>
+      <div class="ci-item"><div class="ci-icon">📧</div><div><strong>Referring Doctors</strong><a href="mailto:doctor@drakhmadkarimi.com">doctor@drakhmadkarimi.com</a></div></div>
+      <div class="ci-item"><div class="ci-icon">📞</div><div><strong>Phone</strong><a href="tel:+922135001234">+92 21 3500 1234</a></div></div>
+      <div class="ci-item"><div class="ci-icon">💳</div><div><strong>Insurance</strong><span>EFU, Jubilee, Adamjee accepted. Card & bank transfer available.</span></div></div>
+      <a href="https://wa.me/923001234567?text=Hello%20Dr.%20Karimi%20clinic%2C%20I%20would%20like%20to%20book%20an%20appointment." class="wa-btn" target="_blank">💬 &nbsp;Message us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <p class="eyebrow reveal">Patient Stories</p>
+  <h2 class="sec-title reveal">What patients say</h2>
+  <p class="sec-sub reveal">Feedback from patients who have trusted Dr. Karimi with their cardiac care.</p>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"After years of palpitations misdiagnosed elsewhere, Dr. Karimi identified my arrhythmia within the first appointment. His explanation was thorough and I left feeling genuinely understood."</p>
+      <div class="t-author"><div class="t-av">SK</div><div><strong>Sana K.</strong><span>Arrhythmia Patient, Lahore</span></div></div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"My father required emergency angioplasty. Dr. Karimi performed the procedure and called us personally afterwards. That level of care is rare. We are deeply grateful."</p>
+      <div class="t-author"><div class="t-av">AR</div><div><strong>Ahmed R.</strong><span>Patient Family, Karachi</span></div></div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"As a referring GP, I send my cardiac patients to Dr. Karimi with complete confidence. His reports are detailed, timely, and his communication with both patients and referring doctors is excellent."</p>
+      <div class="t-author"><div class="t-av">DF</div><div><strong>Dr. Fatima D.</strong><span>GP, DHA Clinic, Lahore</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-alt" id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <p class="eyebrow">Contact</p>
+      <h2 class="sec-title">Get in touch</h2>
+      <div class="red-rule"></div>
+      <div class="contact-block"><h3>Main Clinic</h3><p>Suite 412, Shaukat Khanum Medical Complex<br>Canal Road, Lahore 54000, Pakistan</p></div>
+      <div class="contact-block"><h3>General Enquiries</h3><a href="mailto:info@drakhmadkarimi.com">info@drakhmadkarimi.com</a></div>
+      <div class="contact-block"><h3>Appointment Requests</h3><a href="mailto:appointments@drakhmadkarimi.com">appointments@drakhmadkarimi.com</a></div>
+      <div class="contact-block"><h3>For Referring Doctors</h3><a href="mailto:doctor@drakhmadkarimi.com">doctor@drakhmadkarimi.com</a></div>
+      <div class="contact-block"><h3>WhatsApp</h3><a href="https://wa.me/923001234567" target="_blank">+92 300 123 4567</a></div>
+    </div>
+    <div class="reveal">
+      <div class="map-placeholder"><div class="map-icon">📍</div><p>Google Maps embed via WordPress</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Dr. Ahmad Karimi — Consultant Cardiologist</span>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#appointments">Appointments</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <small>© 2025 Dr. Ahmad Karimi. All rights reserved.</small>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/923001234567?text=Hello%2C%20I%20would%20like%20to%20book%20a%20consultation%20with%20Dr.%20Karimi." class="wa-float" target="_blank" aria-label="Chat on WhatsApp">💬</a>
+
+<!-- ──────────────────── JAVASCRIPT ──────────────────── -->
+<script>
+/* 1. SCROLL PROGRESS BAR */
+const progressBar = document.getElementById('progress-bar');
+function updateProgress() {
+  const scrolled = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled / maxScroll * 100) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+/* 2. NAV — scroll aware */
+const nav = document.getElementById('main-nav');
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id], div.trust-strip');
+function updateNav() {
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+  navLinks.forEach(a => {
+    if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+    else a.classList.remove('active');
+  });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+/* 3. HERO CANVAS — drifting ECG particles */
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  // ECG waveform generator
+  function ecgY(x, phase) {
+    const cycle = x % 120;
+    if (cycle < 40) return Math.sin(cycle / 40 * Math.PI) * 3; // baseline ripple
+    if (cycle < 50) return -10;                                   // P wave
+    if (cycle < 55) return -8;
+    if (cycle < 58) return 30;                                    // QRS spike up
+    if (cycle < 61) return -18;                                   // QRS spike down
+    if (cycle < 65) return 5;
+    if (cycle < 80) return Math.sin((cycle - 65) / 15 * Math.PI) * 8; // T wave
+    return 0;
+  }
+
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x = init ? Math.random() * W : -50;
+      this.y = Math.random() * H;
+      this.speed = 0.3 + Math.random() * 0.5;
+      this.phase = Math.random() * 120;
+      this.alpha = 0.15 + Math.random() * 0.3;
+      this.length = 80 + Math.random() * 80;
+      this.scale = 0.4 + Math.random() * 0.8;
+    }
+    update() {
+      this.x += this.speed;
+      if (this.x > W + 60) this.reset(false);
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(200,16,46,${this.alpha})`;
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < this.length; i++) {
+        const px = this.x - this.length + i;
+        const py = this.y + ecgY(i + this.phase, this.phase) * this.scale;
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+    }
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: 22 }, () => new Particle());
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', () => { resize(); }, { passive: true });
+  init();
+  loop();
+})();
+
+/* 4. HERO TAGLINE TYPING EFFECT */
+(function() {
+  const el = document.getElementById('hero-tagline');
+  const phrases = ['delivered with precision.', 'when every heartbeat matters.', 'built on 20 years of trust.'];
+  let pi = 0, ci = 0, deleting = false;
+  const cursor = '<span style="border-right:2px solid #C8102E;margin-left:1px;animation:blink 0.9s step-end infinite">​</span>';
+  const style = document.createElement('style');
+  style.textContent = '@keyframes blink{50%{border-color:transparent}}';
+  document.head.appendChild(style);
+
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      ci++;
+      el.innerHTML = phrase.slice(0, ci) + cursor;
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 2200); return; }
+      setTimeout(type, 55);
+    } else {
+      ci--;
+      el.innerHTML = phrase.slice(0, ci) + cursor;
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 400); return; }
+      setTimeout(type, 28);
+    }
+  }
+  setTimeout(type, 800);
+})();
+
+/* 5. ANIMATED COUNTERS */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const val = Math.round(eased * target);
+    el.textContent = (target >= 1000 ? val.toLocaleString() : val) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+/* 6. SCROLL REVEAL + COUNTER TRIGGER */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    revealObs.unobserve(e.target);
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left').forEach((el, i) => {
+  el.style.transitionDelay = ((i % 5) * 75) + 'ms';
+  revealObs.observe(el);
+});
+
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('[data-count]').forEach(animateCounter);
+    counterObs.unobserve(e.target);
+  });
+}, { threshold: 0.3 });
+document.querySelector('.hero-stats-bar') && counterObs.observe(document.querySelector('.hero-stats-bar'));
+
+/* 7. PARALLAX ON HERO RIGHT */
+const heroRight = document.getElementById('hero-right');
+window.addEventListener('scroll', () => {
+  if (!heroRight) return;
+  const scrolled = window.scrollY;
+  heroRight.querySelector('.hero-photo-initials').style.transform = `translate(-50%, calc(-54% + ${scrolled * 0.08}px))`;
+}, { passive: true });
+
+/* 8. MAGNETIC BUTTON EFFECT */
+document.querySelectorAll('[data-magnetic]').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2;
+    const y = e.clientY - r.top - r.height / 2;
+    btn.style.transform = `translate(${x * 0.18}px, ${y * 0.25}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+/* 9. APPOINTMENT FORM SUBMIT */
+function handleAppt(e) {
+  e.preventDefault();
+  const btn = document.getElementById('appt-btn');
+  btn.textContent = '✓ Request Received — We\'ll confirm within 24 hours';
+  btn.style.background = '#15803D';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Request Appointment →';
+    btn.style.background = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 5000);
+}
+</script>
+</body>
+</html>
